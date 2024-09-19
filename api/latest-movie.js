@@ -6,6 +6,10 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(rssUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
     const xml = await response.text();
     const data = await parseStringPromise(xml);
 
@@ -25,6 +29,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(latestMovie);
   } catch (error) {
+    console.error('Error:', error.message);
     res.status(500).json({ error: 'Error fetching or parsing the RSS feed' });
   }
 }
