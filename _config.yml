@@ -12,7 +12,7 @@ title                    : "Nabarun's Homepage"
 title_separator          : "-"
 name                     : &name "Nabarun Kar"
 description              : &description "personal description"
-url                      : https://nabarunkar.github.io/home/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://nabarunkar.vercel.app/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 # repository               : "academicpages/academicpages.github.io"
 

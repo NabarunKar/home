@@ -16,6 +16,92 @@ redirect_from:
 
 Besides development, I really like film, music and clicking pictures!
 
+<div id="top-artists" class="top-artists-grid">
+  <!-- Top artists will be displayed here -->
+</div>
+
+<script>
+  // Fetch top artists from your server-side function
+  async function fetchTopArtists() {
+    try {
+      // Fetch the Last.fm data from your API route
+      const response = await fetch('/api/lastfm');
+      const data = await response.json();
+
+      // Extract top artists data
+      const artists = data.topartists.artist;
+
+      // Generate HTML for top artists
+      const artistsHtml = artists.map(artist => `
+        <div class="artist-card" style="background-image: url('${artist.image[3]['#text']}')">
+          <div class="artist-info">
+            <h3 class="artist-name">${artist.name}</h3>
+            <p class="play-count">${artist.playcount} plays</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Insert the generated HTML into the DOM
+      document.getElementById('top-artists').innerHTML = artistsHtml;
+    } catch (error) {
+      console.error('Error fetching top artists:', error);
+    }
+  }
+
+  // Call the function when the script loads
+  fetchTopArtists();
+</script>
+
+
+<style>
+  .top-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+
+  .artist-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .artist-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    color: white;
+  }
+
+  .artist-name {
+    margin: 0;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .play-count {
+    margin: 5px 0 0;
+    font-size: 0.8em;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .top-artists-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
 🎧 Here's the last song I listened to
 
 <div id="lastfm-track" class="animated-card">
