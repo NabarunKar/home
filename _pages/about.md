@@ -18,7 +18,7 @@ Besides development, I really like film, music and clicking pictures!
 
 🎧 Here's the last song I listened to
 
-<div id="lastfm-track" class="glass-card">
+<div id="lastfm-track" class="animated-card">
   <!-- Last played track will be displayed here -->
 </div>
 
@@ -34,11 +34,13 @@ Besides development, I really like film, music and clicking pictures!
 
       // Update the DOM with the track information
       document.getElementById('lastfm-track').innerHTML = `
-        <img src="${albumArt}" alt="${trackName}" class="album-art" />
-        <div class="track-info">
-          <p class="now-playing">Most Recent Track</p>
-          <h2 class="track-name">${trackName}</h2>
-          <p class="artist-name">${artistName}</p>
+        <div class="content-wrapper">
+          <img src="${albumArt}" alt="${trackName}" class="album-art" />
+          <div class="track-info">
+            <p class="now-playing">Now Playing</p>
+            <h2 class="track-name">${trackName}</h2>
+            <p class="artist-name">${artistName}</p>
+          </div>
         </div>
       `;
     })
@@ -46,17 +48,35 @@ Besides development, I really like film, music and clicking pictures!
 </script>
 
 <style>
-  .glass-card {
-    background: #ECDFCC;
-    backdrop-filter: blur(10px);
+  .animated-card {
+    background-image: url('/images/giphy.webp');
+    background-size: cover;
+    background-position: center;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
     max-width: 400px;
     margin: 20px auto;
     overflow: hidden;
+    position: relative;
+  }
+
+  .animated-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
   }
 
   .album-art {
@@ -75,14 +95,14 @@ Besides development, I really like film, music and clicking pictures!
     font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #697565;
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
   }
 
   .track-name {
     font-size: 1.4em;
     font-weight: bold;
-    color: #181C14;
+    color: #ffffff;
     margin: 5px 0;
     white-space: nowrap;
     overflow: hidden;
@@ -91,7 +111,7 @@ Besides development, I really like film, music and clicking pictures!
 
   .artist-name {
     font-size: 1em;
-    color: #3C3D37;
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
   }
 </style>
