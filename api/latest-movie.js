@@ -25,28 +25,28 @@ export default async function handler(req, res) {
       .map(item => {
         const title = item.title ? item.title[0] : 'No Title';
         const link = item.link ? item.link[0] : 'No Link';
-        const rating = item['letterboxd:memberRating'] ? parseFloat(item['letterboxd:memberRating'][0] || '0') : 0;
         const imageUrlMatch = item.description ? item.description[0].match(/<img src="([^"]+)"/) : null;
         const imageUrl = imageUrlMatch ? imageUrlMatch[1] : '';
         const pubDate = item.pubDate ? new Date(item.pubDate[0]) : new Date();
 
-        // Extract year from title if present
-        const yearMatch = title.match(/,\s*(\d{4})$/);
-        const year = yearMatch ? yearMatch[1] : '';
-        const titleWithoutYear = yearMatch ? title.replace(/,\s*\d{4}$/, '').trim() : title;
+        // Extract the direct movie link without the username
+        const directLinkMatch = link.match(/https:\/\/letterboxd\.com\/film\/[^/]+\//);
+        const directLink = directLinkMatch ? directLinkMatch[0] : link;
 
-        return { title: titleWithoutYear, year, link, rating, imageUrl, pubDate };
+        return { title, directLink, imageUrl, pubDate };
       })
-      .filter(movie => movie.rating >= 4.0)
+      .filter(movie => {
+        // You might want to keep your rating filter if it's still relevant
+        const rating = parseFloat(items.find(item => item.title[0] === movie.title)['letterboxd:memberRating'][0] || '0');
+        return rating >= 4.0;
+      })
       .sort((a, b) => b.pubDate - a.pubDate)[0];
 
     if (latestMovie) {
       res.status(200).json({
         title: latestMovie.title,
-        year: latestMovie.year,
-        link: latestMovie.link,
+        link: latestMovie.directLink,
         image: latestMovie.imageUrl,
-        pubDate: latestMovie.pubDate
       });
     } else {
       res.status(404).json({ error: 'No suitable movies found' });
