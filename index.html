@@ -378,7 +378,7 @@
         <div class="content-wrapper">
           <img src="${albumArt}" alt="${trackName}" class="album-art" />
           <div class="track-info">
-            <p class="now-playing">Now Playing</p>
+            <p class="now-playing">Last Played Track</p>
             <h2 class="track-name">${trackName}</h2>
             <p class="artist-name">${artistName}</p>
           </div>
@@ -454,6 +454,79 @@
     font-size: 1em;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
+  }
+</style>
+
+<p>🍿 Last Good Movie I Watched</p>
+
+<div id="latest-movie" class="animated-card">
+  <!-- Latest good movie will be displayed here -->
+</div>
+
+<script>
+  // Fetch latest good movie from serverless function
+  async function fetchLatestMovie() {
+    try {
+      const response = await fetch('/api/latest-movie');
+      const movie = await response.json();
+
+      if (movie) {
+        document.getElementById('latest-movie').innerHTML = `
+          <div class="content-wrapper">
+            <img src="${movie.image}" alt="${movie.title}" class="movie-poster" />
+            <div class="movie-info">
+              <p class="now-watching">Latest Good Movie</p>
+              <h2 class="movie-title">${movie.title}</h2>
+              <p class="movie-rating">Rating: ${movie.rating}</p>
+              <a href="${movie.link}" class="movie-link" target="_blank">See on Letterboxd</a>
+            </div>
+          </div>
+        `;
+      } else {
+        document.getElementById('latest-movie').innerHTML = '<p>No good movies found recently.</p>';
+      }
+    } catch (error) {
+      console.error('Error fetching latest movie:', error);
+    }
+  }
+
+  // Call the function when the script loads
+  fetchLatestMovie();
+</script>
+
+<style>
+  .movie-poster {
+    width: 100px;
+    height: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .movie-info {
+    flex-grow: 1;
+  }
+
+  .movie-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .movie-rating {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .movie-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
   }
 </style>
 
