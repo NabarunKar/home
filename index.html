@@ -270,11 +270,11 @@
 
 <p>🕵️ Currently seeking Software Engineering Internship Roles for Summer 2025!</p>
 
-<h2 id="about-me">About Me</h2>
+<p>Besides development, I really like film, music and clicking pictures!</p>
 
-<p>This is Nabarun’s homepage. Here is the most recently played track on my Last.fm:</p>
+<p>🎧 Here’s the last song I listened to</p>
 
-<div id="lastfm-track">
+<div id="lastfm-track" class="glass-card">
   <!-- Last played track will be displayed here -->
 </div>
 
@@ -286,45 +286,69 @@
       const track = data.recenttracks.track[0];
       const trackName = track.name;
       const artistName = track.artist['#text'];
-      const albumArt = track.image[2]['#text']; // Size 'medium'
+      const albumArt = track.image[3]['#text']; // Size 'large'
 
       // Update the DOM with the track information
       document.getElementById('lastfm-track').innerHTML = `
-        <img src="${albumArt}" alt="${trackName}" />
-        <p>Last played track: <strong>${trackName}</strong> by ${artistName}</p>
+        <img src="${albumArt}" alt="${trackName}" class="album-art" />
+        <div class="track-info">
+          <p class="now-playing">Now Playing</p>
+          <h2 class="track-name">${trackName}</h2>
+          <p class="artist-name">${artistName}</p>
+        </div>
       `;
     })
     .catch(error => console.error('Error fetching Last.fm data:', error));
 </script>
 
-<!-- Inline CSS -->
 <style>
-  .track-info {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+  .glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
     max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #f9f9f9;
+    margin: 20px auto;
+    overflow: hidden;
   }
-  
-  .track-image {
+
+  .album-art {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  p {
-    font-size: 1.2em;
-    color: #333;
+  .track-info {
+    flex-grow: 1;
   }
 
-  strong {
-    color: #007acc;
+  .now-playing {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .track-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .artist-name {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
   }
 </style>
 
