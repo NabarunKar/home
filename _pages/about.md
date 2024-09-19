@@ -211,16 +211,21 @@ Besides development, I really like film, music and clicking pictures!
 <script>
   async function fetchLatestMovie() {
     try {
+      console.log('Fetching latest movie data...');
       const response = await fetch('../api/latest-movie');
+      console.log('Response status:', response.status);
       const movie = await response.json();
+      console.log('Received movie data:', movie);
 
       if (movie && movie.image && movie.link) {
+        console.log('Rendering movie poster');
         document.getElementById('latest-movie').innerHTML = `
           <a href="${movie.link}" target="_blank" rel="noopener noreferrer">
             <img src="${movie.image}" alt="${movie.title}" class="movie-poster" />
           </a>
         `;
       } else {
+        console.log('No valid movie data received');
         document.getElementById('latest-movie').innerHTML = '<p>No movie data available</p>';
       }
     } catch (error) {
