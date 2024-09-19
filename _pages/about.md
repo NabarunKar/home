@@ -221,13 +221,12 @@ Besides development, I really like film, music and clicking pictures!
             <img src="${movie.image}" alt="${movie.title}" class="movie-poster" onerror="this.src='/path/to/placeholder.jpg';" />
             <div class="movie-info">
               <p class="now-watching">Latest Good Movie</p>
-              <h2 class="movie-title">${movie.title}</h2>
+              <h2 class="movie-title" title="${movie.title}">${movie.title}</h2>
               ${movie.year ? `<p class="movie-year">${movie.year}</p>` : ''}
               <a href="${movie.link}" class="movie-link" target="_blank">See on Letterboxd</a>
             </div>
           </div>
         `;
-        adjustFontSize();
       } else {
         document.getElementById('latest-movie').innerHTML = '<p>No good movies found recently.</p>';
       }
@@ -236,75 +235,25 @@ Besides development, I really like film, music and clicking pictures!
     }
   }
 
-  function adjustFontSize() {
-    const titleElement = document.querySelector('.movie-title');
-    const containerWidth = titleElement.offsetWidth;
-    let fontSize = 1.2; // Starting font size in em
-    
-    titleElement.style.whiteSpace = 'nowrap';
-    titleElement.style.fontSize = `${fontSize}em`;
-
-    while (titleElement.scrollWidth > containerWidth && fontSize > 0.7) {
-      fontSize -= 0.1;
-      titleElement.style.fontSize = `${fontSize}em`;
-    }
-
-    // If the font size is too small, switch to two lines
-    if (fontSize <= 0.7) {
-      titleElement.style.whiteSpace = 'normal';
-      titleElement.style.fontSize = '0.9em';
-      titleElement.style.lineHeight = '1.2';
-      titleElement.style.maxHeight = '2.4em'; // 2 lines
-      titleElement.style.overflow = 'hidden';
-    }
-  }
-
   // Call the function when the script loads
   fetchLatestMovie();
-
-  // Adjust font size on window resize
-  window.addEventListener('resize', adjustFontSize);
 </script>
 
 <style>
   .movie-title {
+    font-size: 1.2em;
     font-weight: bold;
     color: #ffffff;
     margin: 5px 0;
-    width: 100%;
-    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust based on your layout */
   }
 
   .movie-year {
     font-size: 0.9em;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
-    text-align: center;
-  }
-
-  .movie-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .movie-poster {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-
-  .animated-card {
-    width: 200px; /* Adjust based on your layout */
-    padding: 10px;
   }
 </style>
