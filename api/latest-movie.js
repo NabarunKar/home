@@ -6,6 +6,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(rssUrl);
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -24,12 +25,13 @@ export default async function handler(req, res) {
       image: item.description[0].match(/<img src="([^"]+)"/)[1], // Extract the image URL from the description
     }));
 
-    // If there are filtered movies, use the most recent one
     const latestMovie = filteredMovies[0] || null;
 
+    res.setHeader('Content-Type', 'application/json');
     res.status(200).json(latestMovie);
   } catch (error) {
     console.error('Error:', error.message);
+    res.setHeader('Content-Type', 'application/json');
     res.status(500).json({ error: 'Error fetching or parsing the RSS feed' });
   }
 }
