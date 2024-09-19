@@ -1,10 +1,12 @@
-import fetch from 'node-fetch';
 import { parseStringPromise } from 'xml2js';
 
 export default async function handler(req, res) {
   const rssUrl = 'https://letterboxd.com/crushedoreos/rss/';
 
   try {
+    // Dynamically import node-fetch
+    const { default: fetch } = await import('node-fetch');
+
     const response = await fetch(rssUrl);
 
     if (!response.ok) {
