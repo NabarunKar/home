@@ -279,13 +279,8 @@
 </div>
 
 <script>
-  // Your Last.fm API key and username
-  const apiKey = "2b8e479ee7a0f801dc64a5f7d733b8dd";
-  const username = 'CrushedOreos';
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json`;
-
-  // Fetch last played track from Last.fm API
-  fetch(url)
+  // Fetch last played track from serverless function
+  fetch('/api/lastfm')
     .then(response => response.json())
     .then(data => {
       const track = data.recenttracks.track[0];
@@ -301,18 +296,6 @@
     })
     .catch(error => console.error('Error fetching Last.fm data:', error));
 </script>
-
-<!-- #lastfm-track {
-  text-align: center;
-  margin-top: 20px;
-}
-#lastfm-track img {
-  max-width: 100px;
-  border-radius: 8px;
-}
-#lastfm-track p {
-  font-size: 1.2em;
-} -->
 
 <!-- Inline CSS -->
 <style>
