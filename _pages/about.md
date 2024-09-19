@@ -212,7 +212,7 @@ Besides development, I really like film, music and clicking pictures!
   // Fetch latest good movie from serverless function
   async function fetchLatestMovie() {
     try {
-      const response = await fetch('/api/latest-movie');
+      const response = await fetch('../api/latest-movie');
       const movie = await response.json();
 
       if (movie) {
