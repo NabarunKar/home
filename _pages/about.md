@@ -82,7 +82,7 @@ Besides development, I really like film, music and clicking pictures!
   .track-name {
     font-size: 1.4em;
     font-weight: bold;
-    color: #ffffff;
+    color: #181C14;
     margin: 5px 0;
     white-space: nowrap;
     overflow: hidden;
@@ -91,7 +91,7 @@ Besides development, I really like film, music and clicking pictures!
 
   .artist-name {
     font-size: 1em;
-    color: rgba(255, 255, 255, 0.8);
+    color: #3C3D37;
     margin: 0;
   }
 </style>
