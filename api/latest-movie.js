@@ -30,7 +30,12 @@ export default async function handler(req, res) {
         const imageUrl = imageUrlMatch ? imageUrlMatch[1] : '';
         const pubDate = item.pubDate ? new Date(item.pubDate[0]) : new Date();
 
-        return { title, link, rating, imageUrl, pubDate };
+        // Extract year from title if present
+        const yearMatch = title.match(/,\s*(\d{4})$/);
+        const year = yearMatch ? yearMatch[1] : '';
+        const titleWithoutYear = yearMatch ? title.replace(/,\s*\d{4}$/, '').trim() : title;
+
+        return { title: titleWithoutYear, year, link, rating, imageUrl, pubDate };
       })
       .filter(movie => movie.rating >= 4.0)
       .sort((a, b) => b.pubDate - a.pubDate)[0];
@@ -38,9 +43,9 @@ export default async function handler(req, res) {
     if (latestMovie) {
       res.status(200).json({
         title: latestMovie.title,
+        year: latestMovie.year,
         link: latestMovie.link,
-        rating: latestMovie.rating,
-        image: latestMovie.imageUrl,  // Make sure this property is named 'image'
+        image: latestMovie.imageUrl,
         pubDate: latestMovie.pubDate
       });
     } else {

@@ -215,14 +215,14 @@ Besides development, I really like film, music and clicking pictures!
       const movie = await response.json();
 
       if (movie) {
-        console.log('Fetched movie data:', movie); // Add this line for debugging
+        console.log('Fetched movie data:', movie); // Keep this for debugging
         document.getElementById('latest-movie').innerHTML = `
           <div class="content-wrapper">
-            <img src="${movie.image}" alt="${movie.title}" class="movie-poster" />
+            <img src="${movie.image}" alt="${movie.title}" class="movie-poster" onerror="this.src='/path/to/placeholder.jpg';" />
             <div class="movie-info">
               <p class="now-watching">Latest Good Movie</p>
-              <h2 class="movie-title">${movie.title}</h2>
-              <p class="movie-rating">Rating: ${movie.rating}</p>
+              <h2 class="movie-title" title="${movie.title}">${movie.title}</h2>
+              ${movie.year ? `<p class="movie-year">${movie.year}</p>` : ''}
               <a href="${movie.link}" class="movie-link" target="_blank">See on Letterboxd</a>
             </div>
           </div>
@@ -252,7 +252,7 @@ Besides development, I really like film, music and clicking pictures!
     flex-grow: 1;
   }
 
-  .movie-title {
+  /* .movie-title {
     font-size: 0.4em;
     font-weight: bold;
     color: #ffffff;
@@ -260,7 +260,7 @@ Besides development, I really like film, music and clicking pictures!
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+  } */
 
   .movie-rating {
     font-size: 1em;
@@ -272,5 +272,21 @@ Besides development, I really like film, music and clicking pictures!
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
+  }
+  .movie-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust based on your layout */
+  }
+
+  .movie-year {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
   }
 </style>
