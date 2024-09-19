@@ -204,8 +204,8 @@ Besides development, I really like film, music and clicking pictures!
 
 🍿 Last Good Movie I Watched
 
-<div id="latest-movie" class="animated-card">
-  <!-- Latest good movie will be displayed here -->
+<div id="latest-movie" class="movie-poster-container">
+  <!-- Latest good movie poster will be displayed here -->
 </div>
 
 <script>
@@ -214,24 +214,18 @@ Besides development, I really like film, music and clicking pictures!
       const response = await fetch('../api/latest-movie');
       const movie = await response.json();
 
-      if (movie) {
-        console.log('Fetched movie data:', movie); // Keep this for debugging
+      if (movie && movie.image && movie.link) {
         document.getElementById('latest-movie').innerHTML = `
-          <div class="content-wrapper">
-            <img src="${movie.image}" alt="${movie.title}" class="movie-poster" onerror="this.src='/path/to/placeholder.jpg';" />
-            <div class="movie-info">
-              <p class="now-watching">Latest Good Movie</p>
-              <h2 class="movie-title" title="${movie.title}">${movie.title}</h2>
-              ${movie.year ? `<p class="movie-year">${movie.year}</p>` : ''}
-              <a href="${movie.link}" class="movie-link" target="_blank">See on Letterboxd</a>
-            </div>
-          </div>
+          <a href="${movie.link}" target="_blank" rel="noopener noreferrer">
+            <img src="${movie.image}" alt="Last good movie I watched" class="movie-poster" />
+          </a>
         `;
       } else {
-        document.getElementById('latest-movie').innerHTML = '<p>No good movies found recently.</p>';
+        document.getElementById('latest-movie').innerHTML = '<p>No movie data available</p>';
       }
     } catch (error) {
       console.error('Error fetching latest movie:', error);
+      document.getElementById('latest-movie').innerHTML = '<p>Error loading movie data</p>';
     }
   }
 
@@ -240,20 +234,20 @@ Besides development, I really like film, music and clicking pictures!
 </script>
 
 <style>
-  .movie-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #ffffff;
-    margin: 5px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px; /* Adjust based on your layout */
+  .movie-poster-container {
+    width: 200px; /* Adjust based on your desired poster size */
+    margin: 20px auto;
   }
 
-  .movie-year {
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
+  .movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .movie-poster:hover {
+    transform: scale(1.05);
   }
 </style>
