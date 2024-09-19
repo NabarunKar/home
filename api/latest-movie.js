@@ -11,17 +11,27 @@ export default async function handler(req, res) {
 
     // Parse the XML to JSON
     const result = await parseStringPromise(text);
+    console.log('Parsed result:', result); // Debug: Check the structure of the parsed XML
+
+    // Ensure the structure is as expected
+    if (!result.rss || !result.rss.channel || !result.rss.channel[0].item) {
+      throw new Error('Unexpected XML structure');
+    }
+
     const items = result.rss.channel[0].item;
 
     // Filter movies with at least a 4.0 rating
     const latestMovie = items
-      .map(item => ({
-        title: item.title[0],
-        link: item.link[0],
-        rating: parseFloat(item['letterboxd:memberRating'][0] || '0'),
-        imageUrl: item.description[0].match(/<img src="([^"]+)"/)?.[1] || '',
-        pubDate: new Date(item.pubDate[0])
-      }))
+      .map(item => {
+        const title = item.title ? item.title[0] : 'No Title';
+        const link = item.link ? item.link[0] : 'No Link';
+        const rating = item['letterboxd:memberRating'] ? parseFloat(item['letterboxd:memberRating'][0] || '0') : 0;
+        const imageUrlMatch = item.description ? item.description[0].match(/<img src="([^"]+)"/) : null;
+        const imageUrl = imageUrlMatch ? imageUrlMatch[1] : '';
+        const pubDate = item.pubDate ? new Date(item.pubDate[0]) : new Date();
+
+        return { title, link, rating, imageUrl, pubDate };
+      })
       .filter(movie => movie.rating >= 4.0)
       .sort((a, b) => b.pubDate - a.pubDate)[0];
 
