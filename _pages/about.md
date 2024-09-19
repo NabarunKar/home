@@ -22,16 +22,9 @@ This is Nabarun's homepage. Here is the most recently played track on my Last.fm
   <!-- Last played track will be displayed here -->
 </div>
 
-
-
 <script>
-  // Your Last.fm API key and username
-  const apiKey = "LASTFM_API_KEY";
-  const username = 'CrushedOreos';
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json`;
-
-  // Fetch last played track from Last.fm API
-  fetch(url)
+  // Fetch last played track from serverless function
+  fetch('/api/lastfm')
     .then(response => response.json())
     .then(data => {
       const track = data.recenttracks.track[0];
@@ -47,19 +40,6 @@ This is Nabarun's homepage. Here is the most recently played track on my Last.fm
     })
     .catch(error => console.error('Error fetching Last.fm data:', error));
 </script>
-
-
-<!-- #lastfm-track {
-  text-align: center;
-  margin-top: 20px;
-}
-#lastfm-track img {
-  max-width: 100px;
-  border-radius: 8px;
-}
-#lastfm-track p {
-  font-size: 1.2em;
-} -->
 
 <!-- Inline CSS -->
 <style>
