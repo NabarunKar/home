@@ -36,7 +36,13 @@ export default async function handler(req, res) {
       .sort((a, b) => b.pubDate - a.pubDate)[0];
 
     if (latestMovie) {
-      res.status(200).json(latestMovie);
+      res.status(200).json({
+        title: latestMovie.title,
+        link: latestMovie.link,
+        rating: latestMovie.rating,
+        image: latestMovie.imageUrl,  // Make sure this property is named 'image'
+        pubDate: latestMovie.pubDate
+      });
     } else {
       res.status(404).json({ error: 'No suitable movies found' });
     }

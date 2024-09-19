@@ -209,13 +209,13 @@ Besides development, I really like film, music and clicking pictures!
 </div>
 
 <script>
-  // Fetch latest good movie from serverless function
   async function fetchLatestMovie() {
     try {
       const response = await fetch('../api/latest-movie');
       const movie = await response.json();
 
       if (movie) {
+        console.log('Fetched movie data:', movie); // Add this line for debugging
         document.getElementById('latest-movie').innerHTML = `
           <div class="content-wrapper">
             <img src="${movie.image}" alt="${movie.title}" class="movie-poster" />
