@@ -217,7 +217,7 @@ Besides development, I really like film, music and clicking pictures!
       if (movie && movie.image && movie.link) {
         document.getElementById('latest-movie').innerHTML = `
           <a href="${movie.link}" target="_blank" rel="noopener noreferrer">
-            <img src="${movie.image}" alt="Last good movie I watched" class="movie-poster" />
+            <img src="${movie.image}" alt="${movie.title}" class="movie-poster" />
           </a>
         `;
       } else {
