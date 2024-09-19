@@ -1,1 +1,1 @@
-Sitemap: https://nabarunkar.github.io/home//sitemap.xml
+Sitemap: https://nabarunkar.vercel.app//sitemap.xml
