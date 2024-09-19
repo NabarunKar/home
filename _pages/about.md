@@ -253,7 +253,7 @@ Besides development, I really like film, music and clicking pictures!
   }
 
   .movie-title {
-    font-size: 1.4em;
+    font-size: 0.4em;
     font-weight: bold;
     color: #ffffff;
     margin: 5px 0;
