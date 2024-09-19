@@ -26,8 +26,8 @@ This is Nabarun's homepage. Here is the most recently played track on my Last.fm
 
 <script>
   // Your Last.fm API key and username
-  const apiKey = 'YOUR_LASTFM_API_KEY';
-  const username = 'YOUR_LASTFM_USERNAME';
+  const apiKey = "LASTFM_API_KEY";
+  const username = 'CrushedOreos';
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json`;
 
   // Fetch last played track from Last.fm API

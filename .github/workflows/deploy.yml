@@ -1,0 +1,35 @@
+name: Deploy GitHub Pages with Secret API Key
+
+on:
+  push:
+    branches:
+      - master  # Trigger the action on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2  # Checkout the code from the repository
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install  # Only needed if you have dependencies
+
+    - name: Inject API Key
+      run: |
+        # Use 'sed' to replace the placeholder with the actual API key in your JavaScript file
+        sed -i 's/LASTFM_API_KEY/${{ secrets.LASTFM_API_KEY }}/g' _pages/about.md
+
+    - name: Build the site
+      run: bundle exec jekyll build  # Adjust this depending on your site's build command
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site  # This assumes you're using Jekyll; adjust if necessary
