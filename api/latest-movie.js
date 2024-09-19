@@ -34,17 +34,20 @@ export default async function handler(req, res) {
         const pubDate = item.pubDate ? new Date(item.pubDate[0]) : new Date();
 
         // Extract the direct movie link without the username
-        const directLinkMatch = link.match(/https:\/\/letterboxd\.com\/film\/[^/]+\//);
-        const directLink = directLinkMatch ? directLinkMatch[0] : link;
+        const directLinkMatch = link.match(/https:\/\/letterboxd\.com\/(?:.*?\/)*film\/([^/]+)/);
+        const directLink = directLinkMatch 
+          ? `https://letterboxd.com/film/${directLinkMatch[1]}/`
+          : link;
 
         console.log(`Processing movie: ${title}`);
+        console.log(`  Original link: ${link}`);
         console.log(`  Direct link: ${directLink}`);
         console.log(`  Image URL: ${imageUrl}`);
 
         return { title, directLink, imageUrl, pubDate };
       })
       .filter(movie => {
-        // You might want to keep your rating filter if it's still relevant
+        // Rating filter logic remains the same
         const ratingItem = items.find(item => item.title[0] === movie.title);
         const rating = ratingItem && ratingItem['letterboxd:memberRating'] 
           ? parseFloat(ratingItem['letterboxd:memberRating'][0] || '0') 
@@ -70,5 +73,3 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Error fetching or parsing the RSS feed' });
   }
 }
-
-
