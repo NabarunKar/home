@@ -36,7 +36,7 @@ Besides development, I really like film, music and clicking pictures!
       document.getElementById('lastfm-track').innerHTML = `
         <img src="${albumArt}" alt="${trackName}" class="album-art" />
         <div class="track-info">
-          <p class="now-playing">Now Playing</p>
+          <p class="now-playing">Most Recent Track</p>
           <h2 class="track-name">${trackName}</h2>
           <p class="artist-name">${artistName}</p>
         </div>
@@ -47,7 +47,7 @@ Besides development, I really like film, music and clicking pictures!
 
 <style>
   .glass-card {
-    background: rgba(255, 255, 255, 0.2);
+    background: #ECDFCC;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 20px;
@@ -75,7 +75,7 @@ Besides development, I really like film, music and clicking pictures!
     font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.8);
+    color: #697565;
     margin: 0;
   }
 
