@@ -8,8 +8,8 @@ main:
   - title: "Resume"
     url: /files/KarNabarun_Resume.pdf
 
-  - title: "Talks"
-    url: /talks/    
+  # - title: "Talks"
+  #   url: /talks/    
 
   # - title: "Teaching"
   #   url: /teaching/    
