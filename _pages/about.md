@@ -202,7 +202,7 @@ Besides development, I really like film, music and clicking pictures!
   }
 </style>
 
-🍿 and the last Good Movie I watched 😁
+🍿 and the last good movie I watched 😁
 
 <div id="latest-movie" class="movie-poster-container">
   <!-- Latest good movie poster will be displayed here -->
