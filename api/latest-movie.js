@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const result = await parseStringPromise(text);
     
     console.log('RSS feed parsed successfully');
-    console.log('Feed structure:', JSON.stringify(result, null, 2));
+    // console.log('Feed structure:', JSON.stringify(result, null, 2));
 
     if (!result.rss || !result.rss.channel || !result.rss.channel[0].item) {
       console.error('Unexpected RSS feed structure');
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     }
 
     const items = result.rss.channel[0].item;
-    console.log(`Found ${items.length} items in the feed`);
+    // console.log(`Found ${items.length} items in the feed`);
 
     const latestMovie = items
       .map(item => {
@@ -39,10 +39,10 @@ export default async function handler(req, res) {
           ? `https://letterboxd.com/film/${directLinkMatch[1]}/`
           : link;
 
-        console.log(`Processing movie: ${title}`);
-        console.log(`  Original link: ${link}`);
-        console.log(`  Direct link: ${directLink}`);
-        console.log(`  Image URL: ${imageUrl}`);
+        // console.log(`Processing movie: ${title}`);
+        // console.log(`  Original link: ${link}`);
+        // console.log(`  Direct link: ${directLink}`);
+        // console.log(`  Image URL: ${imageUrl}`);
 
         return { title, directLink, imageUrl, pubDate };
       })
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         const rating = ratingItem && ratingItem['letterboxd:memberRating'] 
           ? parseFloat(ratingItem['letterboxd:memberRating'][0] || '0') 
           : 0;
-        console.log(`  Rating for ${movie.title}: ${rating}`);
+        // console.log(`  Rating for ${movie.title}: ${rating}`);
         return rating >= 4.0;
       })
       .sort((a, b) => b.pubDate - a.pubDate)[0];
