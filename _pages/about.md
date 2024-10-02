@@ -6,6 +6,12 @@ redirect_from:
   - /about/
   - /about.html
 ---
+<head>
+  <script type="module">
+  import { inject } from '@vercel/analytics';
+  inject();
+  </script>
+</head>
 
 🎓 I am a first year graduate student pursuing a Masters in Computer Science at Texas A&M University
 
