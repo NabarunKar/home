@@ -17,7 +17,7 @@ redirect_from:
 
 👨🏻‍💻 I am passionate about Data Science and Blockchain technologies
 
-🕵️ Currently seeking Software Engineering Internship Roles for Summer 2025!
+🕵️ Currently seeking Full Time Engineering roles for Summer 2026!
 
 
 Besides development, I really like film, music and clicking pictures!
