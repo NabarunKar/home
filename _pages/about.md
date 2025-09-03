@@ -33,6 +33,11 @@ Besides development, I really like film, music and clicking pictures!
     fetch('/api/lastfm')
       .then(response => response.json())
       .then(data => {
+        // Defensive check for missing data
+        if (!data.recenttracks || !data.recenttracks.track || data.recenttracks.track.length === 0) {
+          document.getElementById('lastfm-track').innerHTML = '<p>No Last.fm data available</p>';
+          return;
+        }
         const track = data.recenttracks.track[0];
         const trackName = track.name;
         const artistName = track.artist['#text'];
@@ -58,7 +63,10 @@ Besides development, I really like film, music and clicking pictures!
           </div>
         `;
       })
-      .catch(error => console.error('Error fetching Last.fm data:', error));
+      .catch(error => {
+        console.error('Error fetching Last.fm data:', error);
+        document.getElementById('lastfm-track').innerHTML = '<p>Error loading Last.fm data</p>';
+      });
   </script>
 
 <style>
