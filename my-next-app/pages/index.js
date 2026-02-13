@@ -1,8 +1,11 @@
 import Head from 'next/head';
-import { Code2, Blocks, GraduationCap, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { useState } from 'react';
+import { Code2, Blocks, GraduationCap, Github, Linkedin, Twitter, Mail, Menu, X } from 'lucide-react';
 import LiveStatusSection from '../components/LiveStatusSection';
 
 export default function Home() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <>
       <Head>
@@ -41,7 +44,67 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+
+                    <div className="md:hidden">
+                        <button
+                            type="button"
+                            className="inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:text-white hover:bg-cyber-800 transition-colors"
+                            aria-controls="mobile-nav"
+                            aria-expanded={mobileMenuOpen}
+                            onClick={() => setMobileMenuOpen((open) => !open)}
+                        >
+                            <span className="sr-only">Toggle navigation menu</span>
+                            {mobileMenuOpen ? (
+                                <X className="h-6 w-6" aria-hidden="true" />
+                            ) : (
+                                <Menu className="h-6 w-6" aria-hidden="true" />
+                            )}
+                        </button>
+                    </div>
                 </div>
+
+                {mobileMenuOpen && (
+                    <div id="mobile-nav" className="md:hidden border-t border-cyber-700">
+                        <div className="px-4 py-4 space-y-3">
+                            <a
+                                href="#about"
+                                className="block text-sm font-medium text-slate-200 hover:text-cyber-400 transition-colors"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                About
+                            </a>
+                            {/* <a href="#projects" className="block text-sm font-medium text-slate-200 hover:text-cyber-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Projects</a> */}
+                            <a
+                                href="#hobbies"
+                                className="block text-sm font-medium text-slate-200 hover:text-cyber-400 transition-colors"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Interests
+                            </a>
+                            <a
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center w-full px-4 py-2 bg-cyber-500 hover:bg-blue-600 text-white text-sm font-bold rounded-md transition-all"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Resume
+                            </a>
+
+                            <div className="flex items-center gap-4 pt-3 border-t border-cyber-700">
+                                <a href="https://github.com/NabarunKar" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="GitHub">
+                                    <Github className="w-5 h-5" />
+                                </a>
+                                <a href="https://www.linkedin.com/in/nabarun-kar/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                                    <Linkedin className="w-5 h-5" />
+                                </a>
+                                <a href="mailto:nabarunkar01@gmail.com" className="text-slate-400 hover:text-white transition-colors" aria-label="Email">
+                                    <Mail className="w-5 h-5" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </nav>
 
@@ -65,7 +128,7 @@ export default function Home() {
                                     </h1>
 
                             <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mb-8">
-                                I'm a Master's student in Computer Science at Texas A&M University, with a strong focus on machine learning, data driven optimization, and scalable system design. My work explores how data, algorithms, and decentralized technologies can be combined to build robust, real world systems.
+                                        I&apos;m a Master&apos;s student in Computer Science at Texas A&M University, with a strong focus on machine learning, data driven optimization, and scalable system design. My work explores how data, algorithms, and decentralized technologies can be combined to build robust, real world systems.
                             </p>
 
                             <div className="flex flex-wrap gap-4 text-sm font-mono text-slate-400">
@@ -76,7 +139,7 @@ export default function Home() {
                                     <Blocks className="w-4 h-4 text-cyber-purple" /> Blockchain
                                 </div>
                                 <div className="flex items-center gap-2 bg-cyber-800 px-4 py-2 rounded border border-cyber-700">
-                                    <GraduationCap className="w-4 h-4 text-cyber-emerald" /> TAMU '26
+                                    <GraduationCap className="w-4 h-4 text-cyber-emerald" /> TAMU &apos;26
                                 </div>
                             </div>
                         </div>
