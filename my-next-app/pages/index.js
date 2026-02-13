@@ -23,7 +23,7 @@ export default function Home() {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-center space-x-6">
                             <a href="#about" className="text-sm font-medium hover:text-cyber-400 transition-colors">About</a>
-                            <a href="#projects" className="text-sm font-medium hover:text-cyber-400 transition-colors">Projects</a>
+                            {/* <a href="#projects" className="text-sm font-medium hover:text-cyber-400 transition-colors">Projects</a> */}
                             <a href="#hobbies" className="text-sm font-medium hover:text-cyber-400 transition-colors">Interests</a>
                             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyber-500 hover:bg-blue-600 text-white text-sm font-bold rounded-md transition-all shadow-[0_0_10px_rgba(59,130,246,0.5)]">
                                 Resume
