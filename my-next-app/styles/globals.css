@@ -26,6 +26,108 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* Scoped Projects navbar link inspired by buttons.cool */
+.projects-nav-link {
+  --projects-theme-color: #2effb5;
+  --projects-cut-size: 10px;
+  --projects-animation-timing: 0.3s;
+  --projects-pad: 2px;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: white;
+  border: 1px solid rgb(255 255 255 / 20%);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  background: linear-gradient(
+    to right,
+    rgb(255 255 255 / 5%),
+    rgb(255 255 255 / 16%)
+  );
+  text-decoration: none;
+  cursor: pointer;
+  appearance: none;
+  transition:
+    background var(--projects-animation-timing) ease,
+    border-color var(--projects-animation-timing) ease,
+    color var(--projects-animation-timing) ease;
+}
+
+.projects-nav-link::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--projects-pad));
+  z-index: -1;
+  background: rgb(255 255 255 / 28%);
+  clip-path: polygon(
+    var(--projects-cut-size) 0,
+    100% 0,
+    100% calc(100% - var(--projects-cut-size)),
+    calc(100% - var(--projects-cut-size)) 100%,
+    0 100%,
+    0 var(--projects-cut-size)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  pointer-events: none;
+  transition:
+    inset var(--projects-animation-timing) ease,
+    background var(--projects-animation-timing) ease;
+}
+
+.projects-nav-link:hover,
+.projects-nav-link:focus-visible {
+  --projects-pad: 8px;
+  border-color: var(--projects-theme-color);
+  background: linear-gradient(
+    to right,
+    rgb(46 255 181 / 10%),
+    rgb(46 255 181 / 22%)
+  );
+}
+
+.projects-nav-link:hover::before,
+.projects-nav-link:focus-visible::before {
+  background: var(--projects-theme-color);
+}
+
+.projects-nav-link:focus-visible {
+  outline: 2px solid rgb(46 255 181 / 55%);
+  outline-offset: 6px;
+}
+
+.projects-nav-link__icon {
+  width: 16px;
+  height: 16px;
+  color: rgb(255 255 255 / 80%);
+  transition:
+    color var(--projects-animation-timing) ease,
+    transform var(--projects-animation-timing) ease;
+}
+
+.projects-nav-link:hover .projects-nav-link__icon,
+.projects-nav-link:focus-visible .projects-nav-link__icon {
+  color: var(--projects-theme-color);
+  transform: translateX(2px);
+}
+
+.projects-nav-link--mobile {
+  width: 100%;
+  padding: 10px 16px;
+}
+
 /* Fade in animation */
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out;

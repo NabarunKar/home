@@ -1,7 +1,14 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { Code2, Blocks, GraduationCap, Github, Linkedin, Twitter, Mail, Menu, X } from 'lucide-react';
+import { Space_Grotesk } from 'next/font/google';
+import { Code2, Blocks, GraduationCap, Github, Linkedin, Twitter, Mail, Menu, X, ArrowRight } from 'lucide-react';
 import LiveStatusSection from '../components/LiveStatusSection';
+
+const spaceGrotesk = Space_Grotesk({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+    display: 'swap',
+});
 
 export default function Home() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,6 +37,16 @@ export default function Home() {
                             <a href="#hobbies" className="text-sm font-medium hover:text-cyber-400 transition-colors">Interests</a>
                             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyber-500 hover:bg-blue-600 text-white text-sm font-bold rounded-md transition-all shadow-[0_0_10px_rgba(59,130,246,0.5)]">
                                 Resume
+                            </a>
+                            <a
+                                href="https://nabarun3d.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${spaceGrotesk.className} projects-nav-link`}
+                                aria-label="Projects"
+                            >
+                                <span className="projects-nav-link__text">Projects</span>
+                                <ArrowRight className="projects-nav-link__icon" aria-hidden="true" />
                             </a>
                             <div className="flex items-center gap-4 pl-4 border-l border-cyber-700">
                                 <a href="https://github.com/NabarunKar" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
@@ -89,6 +106,17 @@ export default function Home() {
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Resume
+                            </a>
+                            <a
+                                href="https://nabarun3d.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${spaceGrotesk.className} projects-nav-link projects-nav-link--mobile`}
+                                aria-label="Projects"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <span className="projects-nav-link__text">Projects</span>
+                                <ArrowRight className="projects-nav-link__icon" aria-hidden="true" />
                             </a>
 
                             <div className="flex items-center gap-4 pt-3 border-t border-cyber-700">
