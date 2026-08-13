@@ -151,23 +151,26 @@ export default function Home() {
                     <div className="flex flex-col md:flex-row items-center gap-12 mb-8">
                         <div className="flex-1">
                             <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
-                                        Turning data and decentralized systems into{' '}
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-400 to-cyber-emerald">scalable products</span>
+                                        Building systems with{' '}
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-400 to-cyber-emerald">data, AI, and software</span>.
                                     </h1>
 
                             <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mb-8">
-                                        I&apos;m a Master&apos;s student in Computer Science at Texas A&M University, with a strong focus on machine learning, data driven optimization, and scalable system design. My work explores how data, algorithms, and decentralized technologies can be combined to build robust, real world systems.
+                                        I&apos;m a software engineer and recently graduated with a Master&apos;s degree in Computer Science from Texas A&M University. I build software around data, AI, and systems, ranging from machine learning applications and recommendation engines to backend services and interactive products.
                             </p>
 
                             <div className="flex flex-wrap gap-4 text-sm font-mono text-slate-400">
                                 <div className="flex items-center gap-2 bg-cyber-800 px-4 py-2 rounded border border-cyber-700">
-                                    <Code2 className="w-4 h-4 text-cyber-400" /> Data Science
+                                    <Code2 className="w-4 h-4 text-cyber-400" /> Software Engineering
                                 </div>
                                 <div className="flex items-center gap-2 bg-cyber-800 px-4 py-2 rounded border border-cyber-700">
-                                    <Blocks className="w-4 h-4 text-cyber-purple" /> Blockchain
+                                    <Blocks className="w-4 h-4 text-cyber-purple" /> AI / ML
                                 </div>
                                 <div className="flex items-center gap-2 bg-cyber-800 px-4 py-2 rounded border border-cyber-700">
-                                    <GraduationCap className="w-4 h-4 text-cyber-emerald" /> TAMU &apos;26
+                                    <Blocks className="w-4 h-4 text-cyber-purple" /> Data & Backend
+                                </div>
+                                <div className="flex items-center gap-2 bg-cyber-800 px-4 py-2 rounded border border-cyber-700">
+                                    <GraduationCap className="w-4 h-4 text-cyber-emerald" /> Texas A&M &apos;26
                                 </div>
                             </div>
                         </div>
